@@ -6,6 +6,7 @@
 package Modele;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -41,5 +42,64 @@ public class DAO {
             
         }
         return result;
+    }
+    
+    public void changeRate(String code, String rate) throws SQLException{
+        String sql = "UPDATE DISCOUNT_CODE SET RATE = ? WHERE DISCOUNT_CODE = ?";
+        try(
+                Connection c = this.myDao.getConnection();
+                PreparedStatement stmt =  c.prepareStatement(sql);
+                ){
+            c.setAutoCommit(false);
+            try{
+                stmt.setString(1, rate);
+                stmt.setString(2, code);
+                stmt.execute();
+            }catch (Exception ex) {
+                c.rollback();
+                throw ex; 
+            } finally {
+                c.setAutoCommit(true);
+            }
+        }
+    }
+    
+    public void createVal(String code, String rate)throws SQLException{
+        String sql = "INSERT INTO DISCOUNT_CODE(DISCOUNT_CODE, RATE) VALUES(?,?)";
+        try(
+                Connection c = this.myDao.getConnection();
+                PreparedStatement stmt =  c.prepareStatement(sql);
+                ){
+            c.setAutoCommit(false);
+            try{
+                stmt.setString(1, code);
+                stmt.setString(2, rate);
+                stmt.execute();
+            }catch (Exception ex) {
+                c.rollback();
+                throw ex; 
+            } finally {
+                c.setAutoCommit(true);
+            }
+        }
+    }
+    
+    public void delVal(String code)throws SQLException {
+       String sql = "DELETE FROM DISCOUNT_CODE WHERE DISCOUNT_CODE = ?";
+       try(
+                Connection c = this.myDao.getConnection();
+                PreparedStatement stmt =  c.prepareStatement(sql);
+                ){
+            c.setAutoCommit(false);
+            try{
+                stmt.setString(1, code);
+                stmt.execute();
+            }catch (Exception ex) {
+                c.rollback();
+                throw ex; 
+            } finally {
+                c.setAutoCommit(true);
+            }
+        }
     }
 }

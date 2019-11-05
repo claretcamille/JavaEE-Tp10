@@ -82,8 +82,8 @@ public class DAOTest {
         String code ="M";
         String rate = "0.16";
         this.myDAO.changeRate(code, rate);
-        String listCode[]  ={"H","M","L","N"};
-        String listRate[] ={"16.00","0.16","7.00","0.00"};
+        String listCode[]  ={"H","L","M","N"};
+        String listRate[] ={"16.00","7.00","0.16","0.00"};
         ArrayList<ArrayList<String>> resultExpectend = new ArrayList<ArrayList<String>>();
         for(int i = 0; i< listCode.length;i++){
             ArrayList<String> rs =new ArrayList<String>();
@@ -112,6 +112,24 @@ public class DAOTest {
         }
         ArrayList<ArrayList<String>> resultFonction =this.myDAO.discountCodeList();
        assertEquals(resultExpectend, resultFonction);
+    }
+    
+    @Test
+    public void delValTest() throws SQLException{
+        String code ="A";
+        this.myDAO.delVal(code);
+         String listCode[]  ={"H","L","M","N"};
+        String listRate[] ={"16.00","7.00","11.00","0.00"};
+        ArrayList<ArrayList<String>> resultExpectend = new ArrayList<ArrayList<String>>();
+        for(int i = 0; i< listCode.length;i++){
+            ArrayList<String> rs =new ArrayList<String>();
+            rs.add(listCode[i]);
+            rs.add(listRate[i]);
+            resultExpectend.add(rs);
+        }
+        ArrayList<ArrayList<String>> resultFonction =this.myDAO.discountCodeList();
+       assertEquals(resultExpectend, resultFonction);
+        
     }
    
     public static DataSource getTestDataSource() {
