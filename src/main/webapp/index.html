@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
+        <title>JSP-MVC</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Edition des taux de remise : </h1>
+        
+        <form action="ControlDao" method="GET">
+            code :<input name="code" size="1" maxlength="1" pattern="[A-Z]{1}+" title="Une lettre en MAJUSCULES"><br>
+            Taux:<input name="taux" step="0.01" min="0.0" max="99.99" size="5" type="number"><br>
+             <input name="action" value="ADD" type="hidden">
+             <input value="Ajouter" type="submit">
+        </form>
+        
+        <table border=4>
+            <tbody>
+                <tr>
+                    <th>Code</th>
+                    <th>Taux</th>
+                    <th>Action</th>
+                </tr>
+                
+         
+                
+                <%ArrayList<ArrayList<String>> HT = (ArrayList<ArrayList<String>>) request.getAttribute("HT");
+                                for(int i = 0; i< HT.size();i++){
+                                    ArrayList<String> rs = HT.get(i);
+                                <tr>
+                                    <td><%=rs.get(O)%></td>
+                                    <td><%=rs.get(1)%></td>
+                                    <td><a href="ControllerServlet?action=DELETE&amp;code=<%=rs.get(O)%>">delete</a></td>
+                                </tr>
+                                
+                                }%>
+               </tbody>
+           </div>
+        </table>
     </body>
 </html>

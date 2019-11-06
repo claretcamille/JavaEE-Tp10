@@ -59,7 +59,7 @@ public class DAOTest {
         sqlFile.execute();
         sqlFile.closeReader();		
     }
-    
+    /*
     @Test
     public void discountCodeListTest() throws SQLException{
         System.out.print("discountCodeListTest");
@@ -75,7 +75,7 @@ public class DAOTest {
         ArrayList<ArrayList<String>> resultFonction =this.myDAO.discountCodeList();
        assertEquals(resultExpectend, resultFonction);
         
-    }
+    }*/
   
     @Test 
     public void changeRateTest() throws SQLException{
@@ -101,8 +101,8 @@ public class DAOTest {
         String code ="A";
         String rate = "0.16";
         this.myDAO.createVal(code, rate);
-        String listCode[]  ={"H","M","L","N","A"};
-        String listRate[] ={"16.00","11.00","7.00","0.00","0.16"};
+        String listCode[]  ={"A","H","L","M","N"};
+        String listRate[] ={"0.16","16.00","7.00","11.00","0.00"};
         ArrayList<ArrayList<String>> resultExpectend = new ArrayList<ArrayList<String>>();
         for(int i = 0; i< listCode.length;i++){
             ArrayList<String> rs =new ArrayList<String>();
